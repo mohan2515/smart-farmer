@@ -1,0 +1,192 @@
+const account = document.getElementById('account').value;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    const dbtResult = document.getElementById('dbtResult');
+                    dbtResult.innerHTML = `
+                        <div class="bg-green-100 border-l-4 border-green-500 p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-green-700">
+                                        Your account <strong>${account}</strong> is linked to DBT scheme.
+                                        <br>Last payment: ₹6,000 on 15th May 2023.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    dbtResult.classList.remove('hidden');
+                    
+                    speak('Your bank account is successfully linked with the Direct Benefit Transfer scheme. Last payment of 6000 rupees was credited on 15th May 2023.');
+                }, 1000);
+            });
+        }
+
+        function showPestControlInfo() {
+            contentArea.innerHTML = `
+                <h2 class="text-xl font-bold mb-4">Pest Control Guidelines</h2>
+                <div class="prose max-w-none">
+                    <h3 class="text-lg font-bold">Integrated Pest Management (IPM)</h3>
+                    <p>IPM is an effective and environmentally sensitive approach that combines:</p>
+                    <ul class="list-disc pl-5 my-2 space-y-1">
+                        <li>Biological control (natural predators)</li>
+                        <li>Cultural practices (crop rotation, resistant varieties)</li>
+                        <li>Mechanical methods (traps, barriers)</li>
+                        <li>Chemical pesticides (as last resort)</li>
+                    </ul>
+                    
+                    <h3 class="text-lg font-bold mt-6">Common Pests and Solutions</h3>
+                    <div class="border rounded-lg overflow-hidden my-4">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pest</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Affects</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Solution</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Aphids</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Wheat, vegetables</td>
+                                    <td class="px-4 py-2">Neem oil spray or imidacloprid</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Bollworm</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Cotton</td>
+                                    <td class="px-4 py-2">Bt cotton or spinosad</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Stem borer</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Rice</td>
+                                    <td class="px-4 py-2">Carbofuran or pheromone traps</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="text-lg font-bold mt-6">Yield Improvement</h3>
+                    <p>Proper pest control can improve yields by:</p>
+                    <ul class="list-disc pl-5 my-2 space-y-1">
+                        <li>Reducing crop damage (up to 40% yield loss prevented)</li>
+                        <li>Improving plant health and growth</li>
+                        <li>Reducing disease transmission</li>
+                        <li>Enhancing crop quality for better market prices</li>
+                    </ul>
+                </div>
+                <button onclick="speak('Pest Control Guidelines: Integrated Pest Management combines biological control, cultural practices, mechanical methods and chemical pesticides as last resort. Common pests include aphids, bollworms and stem borers. Proper pest control can prevent up to 40 percent yield loss.')" class="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md flex items-center">
+                    <i class="fas fa-volume-up mr-2"></i> Read Aloud
+                </button>
+            `;
+            
+            contentArea.classList.remove('hidden');
+        }
+
+        function fetchWeatherData() {
+            // Simulate API call with mock data
+            setTimeout(() => {
+                document.getElementById('location').textContent = 'Village Farm, Maharashtra';
+                document.getElementById('temperature').textContent = '32°C';
+                document.getElementById('humidity').textContent = '65%';
+                document.getElementById('wind').textContent = '12 km/h';
+                document.getElementById('rain').textContent = '10%';
+                
+                // Change icon based on temperature
+                const weatherIcon = document.getElementById('weatherIcon');
+                weatherIcon.innerHTML = '<i class="fas fa-sun"></i>';
+            }, 500);
+        }
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message) {
+                // Add user message
+                const userMsg = document.createElement('div');
+                userMsg.className = 'flex justify-end mb-3';
+                userMsg.innerHTML = `
+                    <div class="bg-blue-100 rounded-lg p-3 max-w-xs">
+                        <p>${message}</p>
+                    </div>
+                `;
+                chatMessages.appendChild(userMsg);
+                
+                // Clear input
+                chatInput.value = '';
+                
+                // Simulate bot response
+                setTimeout(() => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'flex justify-start mb-3';
+                    
+                    let response = "I'm sorry, I couldn't understand your question. Can you please rephrase?";
+                    
+                    if (message.toLowerCase().includes('weather')) {
+                        response = "Current weather is sunny with 32°C temperature. Good day for field work.";
+                    } else if (message.toLowerCase().includes('subsidy') || message.toLowerCase().includes('dbt')) {
+                        response = "For DBT subsidy status, please go to the DBT section and enter your bank details.";
+                    } else if (message.toLowerCase().includes('pest')) {
+                        response = "Common pests can be controlled with integrated pest management. Visit the Pest Control section for detailed guidelines.";
+                    }
+                    
+                    botMsg.innerHTML = `
+                        <div class="bg-green-100 rounded-lg p-3 max-w-xs">
+                            <p>${response}</p>
+                        </div>
+                    `;
+                    chatMessages.appendChild(botMsg);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 800);
+            }
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-IN'; // Indian English accent
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('Text-to-speech is not supported in your browser.');
+            }
+        }
+
+        function speakCropInfo(crop) {
+            if (cropsData[crop]) {
+                // Create a simplified version for speech
+                let speechText = cropsData[crop].title + ". ";
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = cropsData[crop].content;
+                
+                // Get all paragraphs and list items
+                const paragraphs = tempDiv.querySelectorAll('p, li');
+                paragraphs.forEach(el => {
+                    speechText += el.textContent + ". ";
+                });
+                
+                speak(speechText);
+            }
+        }
+
+        function speakPriceInfo() {
+            const cropSelect = document.getElementById('cropSelect');
+            const crop = cropSelect ? cropSelect.value : 'rice';
+            
+            if (marketPrices[crop]) {
+                speak(Current market price for ${crop} is ${marketPrices[crop].price}. Demand is ${marketPrices[crop].demand}. This is a ${marketPrices[crop].season} season crop.);
+            } else {
+                speak(Price information not available for ${crop}.);
+            }
+        }
+
+        // Close organic page
+        closeOrganic.addEventListener('click', () => {
+            organicPage.classList.add('hidden');
+        });
+
+        // Initialize with crops menu
+        showCropsMenu();
+    </script>
+</body>
+</html>
